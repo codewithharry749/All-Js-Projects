@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NavBar
+    </title>
+    <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <div class="container-fluid" id="listed">
+        <div class="row NavBar">
+            <div class="col-3 ">
+                <span class="logo" onclick="changeIcon()">HdMovies</span>
+            </div>
+            <div class="col-7">
+                <a href="#"><span>Home</span></a>
+                <a href="#"><span>Contact</span></a>
+                <a href="#"><span>About</span></a>
+                <a href="#"><span>Servises</span></a>
+                <a href="#"><span><i class="fa-solid fa-user-plus"></i></span></a>
+            </div>
+        </div>
+        <div class="row cover">
+            <div class="col-6"><input type="text" id="Input"></div>
+            <div class="col-4"><button id="add"><i class="fa-solid fa-plus"></i>&nbsp; ADD NOTE</button></div>
+        </div>
+        <!-- <div class="row AddedNode">
+            <div class="col-6 text"></div>
+            <div class="col-4 delete"><i class="fa-solid fa-trash"></i> &nbsp; DELETE</div>
+       </div> -->
+    </div>
+    <!-- .................................. -->
+    <script>
+
+        // ---------------------------------------------Header ----------------------------------
+
+        const logo = document.querySelector(".logo");
+        const NavBar = document.querySelector(".NavBar");
+
+        function changeIcon() {
+            logo.innerHTML = '<i class="fa-solid fa-circle-xmark"></i>';
+            NavBar.style = "height:200px";
+            NavBar.setAttribute("transition", 'all .5s linear')
+
+            logo.addEventListener("click", () => {
+                logo.innerHTML = '<i class="fa-solid fa-burger barger"></i>'
+                NavBar.style = "height:60px";
+
+                logo.addEventListener("click", () => {
+                    changeIcon()
+                })
+
+            })
+        }
+
+
+
+        // .........................................................
+
+        const Input = document.getElementById("Input");
+        const add = document.getElementById("add");
+
+        const AddText = document.querySelector(".text");
+        const listed = document.getElementById("listed");
+
+        add.addEventListener("click", () => {
+            const AddedNode1 = document.createElement("div")
+            AddedNode1.innerHTML =
+                `
+        <div class="row AddedNode">
+            <div class="col-6 text">${Input.value}</div>
+            <div class="col-4 delete"><i class="fa-solid fa-trash"></i>&nbsp; DELETE</div>
+       </div>
+        `;
+
+            listed.appendChild(AddedNode1)
+            
+
+           
+            AddedNode1.addEventListener("click",()=>{
+                AddedNode1.remove()
+            })
+            const array = []
+        localStorage.setItem("array",JSON.stringify(([...Input.value],Input.value)))
+        Input.value = ''
+        })
+
+ 
+
+    </script>
+
+</body>
+
+</html>
+
+<!-- <i class="fa-solid fa-trash"></i> -->
